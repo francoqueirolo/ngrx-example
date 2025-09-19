@@ -1,0 +1,17 @@
+<h2>Usuarios de GitHub 🐙 (NgRx + Effects)</h2>
+
+<div *ngIf="isLoading$ | async" class="loading">Cargando usuarios de GitHub...</div>
+
+<div *ngIf="error$ | async as error" class="error-message">
+  Error al cargar: {{ error }}.
+  <button (click)="retryLoad()">Reintentar</button>
+</div>
+
+<ul *ngIf="(users$ | async)?.length" class="user-list">
+  <li *ngFor="let user of users$ | async">
+    <a [href]="user.html_url" target="_blank">
+      <img [src]="user.avatar_url" alt="{{ user.login }}" class="avatar" />
+      <strong>{{ user.login }}</strong>
+    </a>
+  </li>
+</ul>
